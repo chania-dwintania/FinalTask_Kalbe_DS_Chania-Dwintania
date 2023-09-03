@@ -284,18 +284,18 @@ n_clusters = 4
 
 # membuat model KMeans
 kmeans = KMeans(n_clusters=n_clusters, random_state=0)
-cluster_assignments = kmeans.fit_predict(df_cluster)
+cluster = kmeans.fit_predict(df_cluster)
 
 # Membuat scatterplot berdasarkan cluster
 plt.figure(figsize=(8, 6))
-sns.scatterplot(x=df_cluster['Qty'], y=df_cluster['TotalAmount'], s=50, hue=cluster_assignments, palette='viridis')
+sns.scatterplot(x=df_cluster['Qty'], y=df_cluster['TotalAmount'], s=50, hue=cluster, palette='magma')
 plt.xlabel('Quantity Bought')
 plt.ylabel('Total Transaction Amount')
 plt.title('Customer Clustering by Quantity Bought and Total Transaction Amount')
 plt.legend(title='Cluster')
 plt.show()
 
-df_cluster['cluster_label'] = cluster_assignments
+df_cluster['cluster_label'] = cluster
 
 # Mengelompokkan berdasarkan label klaster dan lakukan agregasi
 cluster_summary = df_cluster.groupby(['cluster_label']).agg({
